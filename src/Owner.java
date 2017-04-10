@@ -4,39 +4,29 @@
  */
 public class Owner {
     private String vorname, nachname;
-    private double money;
-    public Owner(double startzustand, String vorname, String nachname){
+    private int verknüpfung;
+
+    public Owner(double startzustand, String vorname, String nachname, int verknüpfung){
         if(startzustand < 0){
             System.out.println("The Value " + startzustand + " is to small! Please choose something above 0");
             return;
         }
-        money = startzustand;
         this.vorname = vorname;
         this.nachname = nachname;
+        this.verknüpfung = verknüpfung;
+        main.bankkonto[verknüpfung] = new Bankkonto(startzustand);
     }
-    public Double getMoney(){
-        return money;
+    public Bankkonto bankkonto(){
+        return main.bankkonto[verknüpfung];
+    }
+    public Double getBalance(){
+        return main.bankkonto[verknüpfung].getBalance();
     }
     public String getVorname(){
         return vorname;
     }
     public String getNachname(){
         return nachname;
-    }
-    public void setMoney(double newMoney){
-        if(newMoney < 0){
-            System.out.println("Your Value is to small, please choose something above 0");
-            return;
-        }
-        this.money = newMoney;
-    }
-    public void addMoney(double addMoney){
-        Double moneyBefore = money;
-        if((moneyBefore + addMoney) < 0){
-            System.out.println("Your value \"" + addMoney + "\" is to small! Please choose something above -" + moneyBefore);
-            return;
-        }
-        this.money = (addMoney + moneyBefore);
     }
     public void setVorname(String newVorname){
         if(newVorname.isEmpty()){
